@@ -1,39 +1,26 @@
 #include <stdio.h>
-#include <stdlib.h>
-
-#define MAX_CHAR 256
-
-void countCharacters(const char* text)
+void func(char** param_1, int length)
 {
-    int count[MAX_CHAR] = {0};
 
-    for (int i = 0; text[i]; i++)
+  int array[127] = {0}; 
+  for (int i = 1; i < length; i++) {
+    for (int j = 0;param_1[i][j]; j++) 
     {
-        int index = (int)text[i];
-        count[index]++;
+      char letter = param_1[i][j];
+      array[(int)letter]++;
     }
+  }
 
-    for (int i = 0; i < MAX_CHAR; i++)
-    {
-        if (count[i] > 0)
-        {
-            printf("%c:%d\n", (char)i, count[i]);
-        }
+  for (int i = 0; i < 127; i++) {
+    if (array[i] > 0) {
+      printf("%c:%d\n", i , array[i]);
     }
+  }
+
 }
 
-int main(int argc, char* argv[])
+int main(int argc, char** argv)
 {
-    if (argc < 2)
-    {
-        printf("Usage: %s text [text2, text3...]\n", argv[0]);
-        return 0;
-    }
 
-    for (int i = 1; i < argc; i++)
-    {
-        countCharacters(argv[i]);
-    }
-
-    return 0;
+  func(argv, argc);
 }
